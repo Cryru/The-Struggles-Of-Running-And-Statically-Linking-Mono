@@ -1,4 +1,4 @@
-Disclaimer: The information below is **not to be considered the absolute truth**. It is simply what worked for me on Windows in regards to getting my Mono code to run on Ubuntu and Mac.
+*Disclaimer: The information below is **not to be considered the absolute truth**. It is simply what worked for me on Windows in regards to getting my Mono code to run on Ubuntu and Mac.*
 
 # 0. Prerequisites
 
@@ -9,7 +9,7 @@ Disclaimer: The information below is **not to be considered the absolute truth**
 
 # 1. Downloading Target SDK
 
-Before you start you need to download Mono SDK packages for the platforms you will be targeting. Your version of Mono, which you can check using `mono --version`, must match the package version. Pick one [here]('http://download.mono-project.com/runtimes/raw/'), and add them using:
+Before you start you need to download Mono SDK packages for the platforms you will be targeting. Your version of Mono, which you can check using `mono --version`, must match the package version. Pick one [here](http://download.mono-project.com/runtimes/raw) and add them using:
 
 `mkbundle --fetch-target {target} --target-server http://download.mono-project.com/runtimes/raw/`
 
@@ -19,7 +19,7 @@ With Mono 5.10.0 the targets I have installed are:
 
 # 2. Packaging
 
-After your application has been built you will need to statically link it with Mono in order for the code to run without Mono installed on the user's machine. First locate where the framework is installed on your computer and find your .Net version, for me this was:
+After your application has been built you will need to statically link it in order for the code to run without Mono installed on the user's machine. First locate where the framework is installed on your computer and find your .Net version, for me this was:
 
 `C:\Program Files\Mono\lib\mono\4.5`
 
