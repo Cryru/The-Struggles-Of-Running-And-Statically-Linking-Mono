@@ -48,5 +48,5 @@ Afterwards run the following command where:
 
 - Some libraries like `ServiceStack.Text` will not work when packaged for some reason. Look for alternatives.
 - When choosing the MonoPath in step 2 look out for folders ending in `-api` like `4.7-api`. They do not work as expected.
-- If you receive an error when launching your application **like** `Unexpected character ")"` this means you've packaged for the wrong platform. Check your `--cross` argument from step 2.
-- The Linux (and Windows with cygwin) command `file {path}` can give you insight into what you've just packaged.
+- If you receive an error when launching your application **like** `Unexpected character ")"` this means you've packaged for the wrong platform. Check your `--cross` argument from step 2. Things like x86 and x64 can play a factor.
+  - The Linux (and Windows with cygwin) command `file {path}` can give you insight into what you've just packaged.
