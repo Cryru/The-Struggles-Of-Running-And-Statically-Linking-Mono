@@ -11,7 +11,7 @@
 
 Before you start you need to download Mono SDK packages for the platforms you will be targeting. Your version of Mono, which you can check using `mono --version`, must match the package version. Pick one [here](http://download.mono-project.com/runtimes/raw) and add them using:
 
-`mkbundle --fetch-target {target} --target-server http://download.mono-project.com/runtimes/raw/`
+`mkbundle --fetch-target $target --target-server http://download.mono-project.com/runtimes/raw/`
 
 With Mono 5.10.0 the targets I have installed are: 
 
@@ -25,15 +25,15 @@ After your application has been built you will need to statically link it in ord
 
 Afterwards run the following command where:
 
-`{OutputFileName}` - Is the name of the output file. No extension is needed.
+`$OutputFileName` - Is the name of the output file. No extension is needed.
 
-`{ExeName}` - The name of the exe to package.
+`$ExeName` - The name of the exe to package.
 
-`{MonoPath}` - The path you chose from the first paragraph.
+`$MonoPath` - The path you chose from the first paragraph.
 
-`{Target}` - The name of the target you will be compiling for.
+`$Target` - The name of the target you will be compiling for.
 
-`mkbundle -o {OutputFileName} {ExeName} -L {MonoPath} --deps --static --cross {Target}`
+`mkbundle -o $OutputFileName $ExeName -L $MonoPath --deps --static --cross $Target`
 
 # 3. Platform Specific Fixes
 
@@ -48,3 +48,5 @@ Afterwards run the following command where:
 
 - Some libraries like `ServiceStack.Text` will not work when packaged for some reason. Look for alternatives.
 - When choosing the MonoPath in step 2 look out for folders ending in `-api` like `4.7-api`. They do not work as expected.
+- If you receive an error when launching your application **like** `Unexpected character ")"` this means you've packaged for the wrong platform. Check your `--cross` argument.
+- The Linux (and Windows with cygwin) command `file {path}` can give you insight into what you've just packaged.
