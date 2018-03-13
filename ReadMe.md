@@ -5,7 +5,7 @@
 - Visual Studio 2017
   - When installing add: Clang and the VS SDK.
 - Mono
-- Knowledge of how to run terminal commands.
+- Knowledge of terminal commands and computers.
 
 # 1. Downloading Target SDK
 
@@ -42,7 +42,7 @@ Afterwards run the following command where:
   - Terminal applications will not open the terminal unless opened from the terminal. I have no solution for this other than invoking Linux stuff to open it yourself.
 - Mac
   - File might open as a text file when double-clicked. In cases like this running `chmod +x {FileName}` worked.
-  - Sometimes the dllmap file will not work when the application is double-clicked but will work when launched from the console from the current folder, resulting in `DLLNotFound` exceptions. It will however not work if launched from another folder. The fix I use for this is to include a `.command` file which will CD to the current folder and launch the application. I've included a template for such a script in this repo under the name `MacRunScriptTemplate.command`. Don't forget Windows line endings as those will break the script on Mac.
+  - Sometimes the dllmap file will not work when the application is double-clicked but will work when launched from the console from the current folder, resulting in `DLLNotFound` exceptions. It will however not work if launched from another folder. The fix I use for this is to include a `.command` file which will `cd` to the current folder and launch the application. I've included a template for such a script in this repo under the name `MacRunScriptTemplate.command`. Don't forget Windows line endings as those will break the script on Mac.
 
 # 4. Notes
 
