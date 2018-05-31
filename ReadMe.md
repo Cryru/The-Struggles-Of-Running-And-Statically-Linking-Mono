@@ -39,14 +39,32 @@ Afterwards run the following command where:
 
 - Linux
   - An error similar to `DLLNotFound: lib.c` can be fixed by including the System.dll.config file from this repo with your application.
-  - Terminal applications will not open the terminal unless opened from the terminal. I have no solution for this other than invoking Linux stuff to open it yourself.
+  - Terminal applications will not open the terminal unless opened from the terminal. I have no solution for this other than invoking Linux stuff to open a console window yourself.
 - Mac
   - File might open as a text file when double-clicked. In cases like this running `chmod +x {FileName}` worked.
   - Sometimes the dllmap file will not work when the application is double-clicked but will work when launched from the console from the current folder, resulting in `DLLNotFound` exceptions. It will however not work if launched from another folder. The fix I use for this is to include a `.command` file which will `cd` to the current folder and launch the application. I've included a template for such a script in this repo under the name `MacRunScriptTemplate.command`. Don't forget Windows line endings as those will break the script on Mac.
 
 # 4. Notes
 
-- Some libraries like `ServiceStack.Text` will not work when packaged for some reason. Look for alternatives.
+- Some libraries like `ServiceStack.Text` will not work when packaged for some reason, this can happen when libraries invoke unmanaged code or are generally not path agnostic. I have no solution for this, look for alternatives.
 - When choosing the MonoPath in step 2 look out for folders ending in `-api` like `4.7-api`. They do not work as expected.
 - If you receive an error when launching your application **like** `Unexpected character ")"` this means you've packaged for the wrong platform. Check your `--cross` argument from step 2. Things like x86 and x64 can play a factor.
   - The Linux (and Windows with cygwin) command `file {path}` can give you insight into what you've just packaged.
+- Sometimes your `.dll.config` file correctly points to the platform library but execution will still claim it cannot find it. This happens when your unmanaged library requires another library which is missing. To debug this use the `MONO_LOG_LEVEL=debug mono $Exe.exe` command where `$Exe` is the compiled **non-bundled** executable.
+  
+ # 5. Useful Pages and Projects
+ 
+ ### MonoKickStart
+ 
+ https://github.com/OutOfOrder/MonoKickstart
+ 
+ Something like the included `MacRunScriptTemplate.command` but **VERY** expanded.
+ 
+ ### Mono MKBundle and Linking Documentation
+ 
+ http://www.mono-project.com/docs/tools+libraries/tools/mkbundle/
+ http://www.mono-project.com/docs/advanced/pinvoke/dllnotfoundexception/
+ 
+ ### Example
+ 
+ https://github.com/mrts/mono-static-linking
