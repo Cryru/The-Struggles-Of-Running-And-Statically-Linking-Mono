@@ -13,7 +13,7 @@ Before you start you need to download Mono SDK packages for the platforms you wi
 
 `mkbundle --fetch-target $target --target-server http://download.mono-project.com/runtimes/raw/`
 
-With Mono 5.10.0 the targets I have installed are: 
+where `$target` is the name of the target you want to add. On Mono 5.10.0 the targets I have installed are: 
 
 `mono-5.10.0-osx-10.7-x64` and `mono-5.10.0-ubuntu-16.04-x64`
 
@@ -29,11 +29,23 @@ Afterwards run the following command where:
 
 `$ExeName` - The name of the exe to package.
 
-`$MonoPath` - The path you chose from the first paragraph.
+`$MonoPath` - The path you located in the first paragraph.
 
 `$Target` - The name of the target you will be compiling for.
 
 `mkbundle -o $OutputFileName $ExeName -L $MonoPath --deps --static --cross $Target`
+
+Optionally you can add a machine.config to ensure environment similiary by adding the following argument to the command above. 
+
+`--machine-config $config`
+
+The config is usually found in `%windir%\Microsoft.NET\Framework64\$version\config\machine.config` for 64-bit systems or `%windir%\Microsoft.NET\Framework\$version\config\machine.config` for 32-bit systems.
+
+For example: `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\machine.config`.
+
+**Note:** Some .NET versions use the same CLR, so for instance version `v3.0` and `v3.5` will not contain a machine.config - they will use the one present in version `2.0.50727`.
+
+**Tip:** You can easily find your config by running the `[System.Runtime.InteropServices.RuntimeEnvironment]::SystemConfigurationFile` command in PowerShell.
 
 # 3. Platform Specific Fixes
 
