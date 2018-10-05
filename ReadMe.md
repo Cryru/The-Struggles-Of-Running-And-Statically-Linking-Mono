@@ -35,7 +35,7 @@ Afterwards run the following command where:
 
 `mkbundle -o $OutputFileName $ExeName -L $MonoPath --deps --static --cross $Target`
 
-Optionally you can add a machine.config to ensure environment similiary by adding the following argument to the command above. 
+Optionally you can add a machine.config to ensure environment similarity by adding the following argument to the command above. 
 
 `--machine-config $config`
 
