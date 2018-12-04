@@ -19,17 +19,13 @@ where `$target` is the name of the target you want to add. On Mono 5.10.0 the ta
 
 # 2. Packaging
 
-After your application has been built you will need to statically link it in order for the code to run without Mono installed on the user's machine. First locate where the framework is installed on your computer and find your .Net version, for me this was:
+After your application has been built you will need to statically link it in order for the code to run without Mono installed on the user's machine.
 
-`C:\Program Files\Mono\lib\mono\4.5`
-
-Afterwards run the following command where:
+To do so run the following command, where:
 
 `$OutputFileName` - Is the name of the output file. No extension is needed.
 
 `$ExeName` - The name of the exe to package.
-
-`$MonoPath` - The path you located in the first paragraph.
 
 `$Target` - The name of the target you will be compiling for.
 
@@ -44,6 +40,10 @@ The config is usually found in `%windir%\Microsoft.NET\Framework64\$version\conf
 For example: `C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Config\machine.config`.
 
 **Note:** Some .NET versions use the same CLR, so for instance version `v3.0` and `v3.5` will not contain a machine.config - they will use the one present in version `2.0.50727`.
+
+Also optionally you can add a specific implementation of the standard library by specifying `-L $MonoPath` where `$MonoPath`is the path where the framework is installed on your computer and find your .Net version, for me this was `C:\Program Files\Mono\lib\mono\4.5`
+
+**Note:** Its better not to do this, but it might solve your issue.
 
 **Tip:** You can easily find your config by running the `[System.Runtime.InteropServices.RuntimeEnvironment]::SystemConfigurationFile` command in PowerShell.
 
