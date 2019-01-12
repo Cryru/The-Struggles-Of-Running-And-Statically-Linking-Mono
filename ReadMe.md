@@ -47,6 +47,8 @@ Also optionally you can add a specific implementation of the standard library by
 
 **Tip:** You can easily find your config by running the `[System.Runtime.InteropServices.RuntimeEnvironment]::SystemConfigurationFile` command in PowerShell.
 
+**Tip:** After packing you can remove non-native DLLs (managed). They are no longer required and will be loaded from the package you've created, this is important to remember, as you need to repackage when updating them.
+
 # 3. Platform Specific Fixes
 
 - Linux
