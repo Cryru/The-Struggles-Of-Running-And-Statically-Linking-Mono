@@ -73,7 +73,7 @@ Also optionally you can add a specific implementation of the standard library by
  
  https://github.com/Cryru/Emotion
  
- Here you can see how I've setup my project. The files of most interest would be the ".dll.config" files, and the OS specific bootstraps located [here](https://github.com/Cryru/Emotion/blob/master/EmotionCore/src/Engine/Context.cs#L340.
+ Here you can see how I've setup my project. The files of most interest would be the ".dll.config" files, and the OS specific bootstraps located [here](https://github.com/Cryru/Emotion/blob/master/EmotionCore/src/Engine/Context.cs#L340).
  
  ### MonoKickStart
  
