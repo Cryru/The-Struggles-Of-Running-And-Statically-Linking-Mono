@@ -57,6 +57,7 @@ Also optionally you can add a specific implementation of the standard library by
 - Mac
   - File might open as a text file when double-clicked. In cases like this running `chmod +x {FileName}` worked. You might want to do the same for the mkbundle result as well.
   - Sometimes the dllmap file will not work when the application is double-clicked but will work when launched from the console from the current folder, resulting in `DLLNotFound` exceptions. It will however not work if launched from another folder. The fix I use for this is to include a `.command` file which will `cd` to the current folder and launch the application. I've included a template for such a script in this repo under the name `MacRunScriptTemplate.command`. Don't forget Windows line endings as those will break the script on Mac.
+  - Paths in `.dll.config` files on map should be relative. ex. './Libraries' instead of '/Libraries'.
 
 # 4. Notes
 
@@ -64,9 +65,15 @@ Also optionally you can add a specific implementation of the standard library by
 - When choosing the MonoPath in step 2 look out for folders ending in `-api` like `4.7-api`. They do not work as expected.
 - If you receive an error when launching your application **like** `Unexpected character ")"` this means you've packaged for the wrong platform. Check your `--cross` argument from step 2. Things like x86 and x64 can play a factor.
   - The Linux (and Windows with cygwin) command `file {path}` can give you insight into what you've just packaged.
-- Sometimes your `.dll.config` file correctly points to the platform library but execution will still claim it cannot find it. This happens when your unmanaged library requires another library which is missing. To debug this use the `MONO_LOG_LEVEL=debug mono $Exe.exe` command where `$Exe` is the compiled **non-bundled** executable.
+- Sometimes your `.dll.config` file correctly points to the platform library but execution will still claim it cannot find it. This happens when your unmanaged library requires another library which is missing. To debug this use the `MONO_LOG_LEVEL=debug mono $Exe.exe` command where `$Exe` is the compiled **non-bundled** executable. To resolve these issues you can either change the `LD_LIBRARY_PATH` on Linux or the `DYLD_LIBRARY_PATH` on Mac using a script such as MonoKickstart (linked below) or you can dlopen them manually. For examples go [here](https://github.com/Cryru/Emotion/blob/master/EmotionCore/src/Engine/Context.cs#L340). Usually that does the trick on Linux, but on Mac you might need to use the "otool" and the "install_name_tool" tools. With `otool -L {lib}.dylib` you can see where it expects certain libraries to be and with `install_name_tool -change {oldPath} {newPath} {lib}.dylib` you can change that path. The paths are relative to the executable and not the library, and after you change them you can redistribute the modified library.
   
  # 5. Useful Pages and Projects
+ 
+ ### My Game Engine - Emotion
+ 
+ https://github.com/Cryru/Emotion
+ 
+ Here you can see how I've setup my project. The files of most interest would be the ".dll.config" files, and the OS specific bootstraps located [here](https://github.com/Cryru/Emotion/blob/master/EmotionCore/src/Engine/Context.cs#L340.
  
  ### MonoKickStart
  
