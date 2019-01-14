@@ -1,10 +1,10 @@
-*Disclaimer: The information below is **not to be considered the absolute truth**. It is simply what worked for me on Windows in regards to getting my Mono code to run on Ubuntu and Mac.*
+*Disclaimer: The information below is **not to be considered the absolute truth**. It is simply what worked for me on Windows in regards to getting my Mono code to run on Linux and Mac.*
 
 # 0. Prerequisites
 
 - Visual Studio 2017
   - When installing add: Clang and the VS SDK.
-- Mono
+- Mono (I use version 5.16.0)
 - Knowledge of terminal commands and computers.
 
 # 1. Downloading Target SDK
@@ -13,9 +13,9 @@ Before you start you need to download Mono SDK packages for the platforms you wi
 
 `mkbundle --fetch-target $target --target-server http://download.mono-project.com/runtimes/raw/`
 
-where `$target` is the name of the target you want to add. On Mono 5.10.0 the targets I have installed are: 
+where `$target` is the name of the target you want to add. On Mono 5.16.0 the targets I have installed are: 
 
-`mono-5.10.0-osx-10.7-x64` and `mono-5.10.0-ubuntu-16.04-x64`
+`mono-5.16.0-osx-10.7-x64` and `mono-5.16.0-debian-9-x64`
 
 # 2. Packaging
 
@@ -29,9 +29,9 @@ To do so run the following command, where:
 
 `$Target` - The name of the target you will be compiling for.
 
-`mkbundle -o $OutputFileName $ExeName -L $MonoPath --deps --static --cross $Target`
+**`mkbundle -o $OutputFileName $ExeName --deps --static --cross $Target`**
 
-Optionally you can add a machine.config to ensure environment similarity by adding the following argument to the command above. 
+This command should work for most purposes, but optionally you can add a machine.config to ensure environment similarity by adding the following argument to the command above. 
 
 `--machine-config $config`
 
